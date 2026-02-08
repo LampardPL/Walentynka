@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>💖 Walentynka?</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom, #ffb6c1, #ffc0cb);
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+      margin: 0;
+      height: 100vh;
+      position: relative;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 42px;
+    }
+
+    button {
+      font-size: 22px;
+      padding: 12px 25px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    .yes {
+      background: red;
+      color: white;
+      top: 50%;
+      left: 40%;
+      transform: translate(-50%, -50%);
+    }
+
+    .no {
+      background: white;
+      top: 50%;
+      left: 60%;
+      transform: translate(-50%, -50%);
+    }
+
+    #result {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #result img {
+      width: 250px;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+      margin-top: 10px;
+    }
+
+    #result h2 {
+      color: red;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: fall linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh); opacity: 1; }
+      100% { transform: translateY(110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Czy zostaniesz moją walentynką? 💘</h1>
+
+  <button class="yes" onclick="showResult()">TAK 💕</button>
+  <button class="no" id="no">NIE 💔</button>
+
+  <div id="result">
+    <h2>Yaaay! SUUUUPER! Dalmachińczyk ma dla ciebie kwiatka 💖</h2>
+    <img src="dalmatyńczyk.jpg" alt="Twój Piesek">
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const result = document.getElementById("result");
+
+    // FUNKCJA UCIEKANIA PRZYCISKU NIE
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // FUNKCJA DLA PRZYCISKU TAK
+    function showResult() {
+      result.style.display = "block";
+    }
+
+    // SPADAJĄCE SERDUSZKA
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💖";
+      heart.style.left = Math.random() * window.innerWidth + "px";
+      heart.style.animationDuration = (2 + Math.random() * 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
